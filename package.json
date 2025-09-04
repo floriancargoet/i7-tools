@@ -4,6 +4,7 @@
   "version": "0.0.2",
   "license": "MIT",
   "author": "Florian Cargoët",
+  "repository": "github:floriancargoet/i7-tools",
   "files": [
     "dist",
     "CHANGELOG.md"
