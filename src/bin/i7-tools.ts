@@ -31,13 +31,15 @@ program
 
 program
   .command("add-to-multirelease")
-  .description("Add the current release to the .materials/MultiRelease/ folder")
+  .description(
+    "Create a release and add it to the .materials/MultiRelease/ folder"
+  )
   .argument("[project]", ".inform directory")
   .action((projectPath: string = "") => {
-    // TODO: do a custom release with a special blurb file (replacing [ENCODEDFILE])
     const project = Project.fromPath(projectPath);
     const compiler = new InformCompiler({ project });
     const releaser = new MultiReleaser({ project });
+    // We use a modified Release.blurb to include select-version.js
     const customBlurb = releaser.makeTempBlurb();
     compiler.compileI6().compileI7().release(customBlurb);
     releaser.removeTempBlurb();
