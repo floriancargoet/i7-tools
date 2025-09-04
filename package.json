@@ -1,0 +1,22 @@
+{
+  "name": "@floriancargoet/i7-tools",
+  "type": "module",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Florian Cargoët",
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "description": "My tools to work with Inform 7",
+  "bin": {
+    "i7-tools": "./dist/bin/i7-tools.js"
+  },
+  "dependencies": {
+    "commander": "14.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "typescript": "5.9.2"
+  }
+}
