@@ -4,14 +4,17 @@
   "version": "0.0.3",
   "license": "MIT",
   "author": "Florian Cargoët",
-  "repository": "github:floriancargoet/i7-tools",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floriancargoet/i7-tools.git"
+  },
   "files": [
     "dist",
     "CHANGELOG.md"
   ],
   "description": "My tools to work with Inform 7",
   "bin": {
-    "i7-tools": "./dist/bin/i7-tools.js"
+    "i7-tools": "dist/bin/i7-tools.js"
   },
   "dependencies": {
     "commander": "14.0.0"
