@@ -19,8 +19,8 @@
   "dependencies": {
     "chalk": "5.6.0",
     "commander": "14.0.0",
-    "jsdom": "26.1.0",
-    "text-diff": "1.0.1"
+    "diff": "^8.0.2",
+    "jsdom": "26.1.0"
   },
   "devDependencies": {
     "@types/jsdom": "21.1.7",

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import fs from "fs";
-// @ts-expect-error Not typed
-import Diff from "text-diff";
+import { diffWords, type ChangeObject } from "diff";
 import chalk from "chalk";
 import { Project } from "./Project.js";
 import { InformParser } from "./InformParser.js";
@@ -39,7 +38,7 @@ export function inject(project: Project, texts: Record<string, string>) {
       newText = texts[id]!;
       if (existing !== newText) {
         modifiedCount++;
-        console.log(`${id}: ${coloredDiff(computeDiff(existing, newText))}`);
+        console.log(`${id}: ${coloredDiff(diffWords(existing, newText))}`);
       } else {
         console.log(`${id}: up-to-date.`);
       }
@@ -56,24 +55,12 @@ export function inject(project: Project, texts: Record<string, string>) {
   console.log(`Modified: ${modifiedCount}`);
 }
 
-function computeDiff(str1: string, str2: string) {
-  const diff = new Diff();
-  const result = diff.main(str1, str2);
-  diff.cleanupSemantic(result);
-  return result;
-}
-
-function coloredDiff(diffs: Array<[number, string]>) {
+function coloredDiff(diffs: Array<ChangeObject<string>>) {
   return diffs
-    .map(([op, text]) => {
-      switch (op) {
-        case 1:
-          return chalk.green(text);
-        case -1:
-          return chalk.strikethrough.red(text);
-        case 0:
-          return text;
-      }
+    .map((part) => {
+      if (part.added) return chalk.green(part.value);
+      if (part.removed) return chalk.strikethrough.red(part.value);
+      return part.value;
     })
     .join("");
 }
