@@ -1,4 +1,5 @@
 import fs from "node:fs";
+
 import { Project } from "./Project.js";
 
 type Token = {

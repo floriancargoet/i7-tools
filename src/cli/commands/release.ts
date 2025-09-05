@@ -1,4 +1,5 @@
 import type { Command } from "commander";
+
 import { InformCompiler } from "../../InformCompiler.js";
 import { Project } from "../../Project.js";
 

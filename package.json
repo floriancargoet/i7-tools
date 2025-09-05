@@ -23,8 +23,15 @@
     "jsdom": "26.1.0"
   },
   "devDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
+    "@eslint/js": "9.35.0",
     "@types/jsdom": "21.1.7",
     "@types/node": "24.3.1",
-    "typescript": "5.9.2"
+    "eslint-config-prettier": "10.1.8",
+    "eslint-import-resolver-typescript": "4.4.4",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-promise": "7.2.1",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.42.0"
   }
 }

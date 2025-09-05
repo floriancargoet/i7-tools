@@ -1,4 +1,6 @@
 {
+  "include": ["src"],
+  "exclude": ["src/MultiReleaser/browser-select-version.js"],
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout

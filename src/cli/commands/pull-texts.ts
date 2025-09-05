@@ -1,4 +1,5 @@
 import { InvalidArgumentError, type Command } from "commander";
+
 import { Project } from "../../Project.js";
 import { getTextsFromGoogleDocs } from "../../google-docs.js";
 import { inject } from "../../inject.js";
@@ -44,6 +45,8 @@ function parseHeading(h: string) {
 function extractID(urlOrId: string) {
   let id: string | undefined;
   if (URL.canParse(urlOrId)) {
+    // We just checked canParse, it's safe
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const url = URL.parse(urlOrId)!;
     if (
       url.hostname !== "docs.google.com" ||

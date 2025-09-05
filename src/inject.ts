@@ -1,9 +1,10 @@
-#!/usr/bin/env node
-import fs from "fs";
-import { diffWords, type ChangeObject } from "diff";
+import fs from "node:fs";
+
 import chalk from "chalk";
-import { Project } from "./Project.js";
+import { diffWords, type ChangeObject } from "diff";
+
 import { InformParser } from "./InformParser.js";
+import { Project } from "./Project.js";
 
 export function inject(project: Project, texts: Record<string, string>) {
   const parser = new InformParser(project);
@@ -35,6 +36,8 @@ export function inject(project: Project, texts: Record<string, string>) {
       newText = existing;
       console.log(`${id}: not in external document.`);
     } else {
+      // We just checked that it exists, it's safe
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       newText = texts[id]!;
       if (existing !== newText) {
         modifiedCount++;

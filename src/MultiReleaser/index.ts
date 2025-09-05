@@ -1,6 +1,6 @@
 import fs from "node:fs";
-import path from "node:path";
 import os from "node:os";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { Project } from "../Project.js";
@@ -24,6 +24,7 @@ type MandatoryOptions = {
   project: Project;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type OptionalOptions = {};
 type Options = MandatoryOptions & OptionalOptions;
 
@@ -74,22 +75,18 @@ export class MultiReleaser {
     }
   }
 
-  async computeQuixeSignature(ulxFilepath: string) {
+  computeQuixeSignature(ulxFilepath: string) {
     // Compute the game signature (as done by quixe, 64 first bytes as hexa string)
-    return (
-      await fs
-        .createReadStream(ulxFilepath)
-        .flatMap((chunk) => new Uint8Array(chunk))
-        .take(64)
-        .toArray()
-    )
-      .map((b) => ("0" + b.toString(16)).slice(-2))
-      .join("");
+    const file = fs.openSync(ulxFilepath, "r");
+    const buf = Buffer.alloc(64);
+    fs.readSync(file, buf, 0, 64, null);
+    fs.closeSync(file);
+    return buf.toString("hex");
   }
 
-  async addToMultiRelease() {
+  addToMultiRelease() {
     // Take the current build from the Build directory
-    const signature = await this.computeQuixeSignature(this.project.ulxPath);
+    const signature = this.computeQuixeSignature(this.project.ulxPath);
     console.log("Game signature:", signature);
 
     // Ensure directories exist
@@ -102,7 +99,9 @@ export class MultiReleaser {
     };
     if (fs.existsSync(this.releasesJSONPath)) {
       try {
-        map = JSON.parse(fs.readFileSync(this.releasesJSONPath, "utf-8"));
+        map = JSON.parse(
+          fs.readFileSync(this.releasesJSONPath, "utf-8")
+        ) as Map;
       } catch (e) {
         console.log("Invalid releases.json");
       }
@@ -112,8 +111,11 @@ export class MultiReleaser {
     for (const release of map.releases) {
       if (signature === release.signature) {
         console.warn(
-          "Signature already exists in releases.json: " +
-            JSON.stringify(release, null, 2)
+          `Signature already exists in releases.json: ${JSON.stringify(
+            release,
+            null,
+            2
+          )}`
         );
       }
       lastVersion = Math.max(lastVersion, release.version ?? -1);

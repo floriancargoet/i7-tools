@@ -1,7 +1,8 @@
 import type { Command } from "commander";
+
 import { InformCompiler } from "../../InformCompiler.js";
-import { Project } from "../../Project.js";
 import { MultiReleaser } from "../../MultiReleaser/index.js";
+import { Project } from "../../Project.js";
 
 export function registerAddToMultiReleaseCommand(program: Command) {
   program

@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import { registerReleaseCommand } from "./commands/release.js";
+
 import { registerAddToMultiReleaseCommand } from "./commands/add-to-multirelease.js";
 import { registerPullTextsCommand } from "./commands/pull-texts.js";
+import { registerReleaseCommand } from "./commands/release.js";
 
 const program = new Command();
 

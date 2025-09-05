@@ -1,6 +1,6 @@
-import os from "node:os";
-import fs from "node:fs";
 import cp from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 
 import { Project } from "./Project.js";
@@ -23,7 +23,7 @@ function getPath(key: keyof (typeof PATHS)["darwin"]) {
   if (platform in PATHS) {
     return PATHS[platform as keyof typeof PATHS][key];
   }
-  throw new Error("Unsupported platform: " + platform);
+  throw new Error(`Unsupported platform: ${platform}`);
 }
 
 type MandatoryOptions = {

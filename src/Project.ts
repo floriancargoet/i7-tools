@@ -1,6 +1,7 @@
-import { InvalidArgumentError } from "commander";
 import fs from "node:fs";
 import path from "node:path";
+
+import { InvalidArgumentError } from "commander";
 
 function exit(msg: string) {
   throw new InvalidArgumentError(msg);
@@ -36,6 +37,8 @@ export class Project {
           exit("No project found in directory");
         } else if (candidates.length === 1) {
           // Use the only .inform that we found
+          // We just checked the length, it's safe
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           projectPath = path.resolve(parentFolder, candidates[0]!);
         } else {
           exit("Multiple projects found in directory");
@@ -57,7 +60,7 @@ export class Project {
   }
 
   get materialsDir() {
-    return path.resolve(this.projectDir, "..", this.projectName + ".materials");
+    return path.resolve(this.projectDir, "..", `${this.projectName}.materials`);
   }
 
   get materialsReleaseDir() {
