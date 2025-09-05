@@ -2,9 +2,9 @@
 
 My collection of tools to work with Inform 7.
 
-:warning: **Note**: for now, it only works on MacOS with Inform 6L38.
-
 ## i7-tools release
+
+:warning: **Note**: for now, it only works on MacOS with Inform 6L38.
 
 `i7-tools release [project]`: Releases the project, just like in the IDE.
 
@@ -13,6 +13,8 @@ My collection of tools to work with Inform 7.
 :information_source: **Note**: it fixes a bug on MacOS where the IDE doesn't release properly when using testing mode.
 
 ## i7-tools add-to-multirelease
+
+:warning: **Note**: for now, it only works on MacOS with Inform 6L38.
 
 When playing an Inform game online, your saves only work with that exact version. If the author publishes a new version, your saves are dead.
 
