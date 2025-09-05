@@ -16,6 +16,10 @@
   "bin": {
     "i7-tools": "dist/cli/i7-tools.js"
   },
+  "scripts": {
+    "build": "npx tsc",
+    "publish": "npm run build && npm publish --access public"
+  },
   "dependencies": {
     "chalk": "5.6.0",
     "commander": "14.0.0",
