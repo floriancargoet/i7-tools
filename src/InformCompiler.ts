@@ -53,10 +53,13 @@ export class InformCompiler {
 
   exec(command: string, args: Array<string>) {
     // remove empty args, always execute in BUILD_DIR
-    cp.spawnSync(command, args.filter(Boolean), {
+    const result = cp.spawnSync(command, args.filter(Boolean), {
       stdio: ["inherit", this.options.silent ? "ignore" : "inherit", "inherit"],
       cwd: this.project.buildDir,
     });
+    if (result.status !== 0) {
+      process.exit(result.status);
+    }
   }
 
   compileI7() {
@@ -72,6 +75,7 @@ export class InformCompiler {
       "-noprogress",
       this.options.testing ? "" : "-release",
     ]);
+
     return this;
   }
 
@@ -90,6 +94,7 @@ export class InformCompiler {
       `${this.project.buildDir}/auto.inf`,
       this.project.ulxPath,
     ]);
+
     return this;
   }
 
@@ -119,10 +124,11 @@ export class InformCompiler {
       blurbPath,
       path.resolve(this.project.buildDir, "output.gblorb"),
     ]);
+
     return this;
   }
 
   compileAndRelease() {
-    return this.compileI6().compileI7().release();
+    return this.compileI7().compileI6().release();
   }
 }

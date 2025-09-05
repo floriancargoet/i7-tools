@@ -27,3 +27,17 @@ The concept of _multirelease_ is to keep around all the published versions of yo
 :warning: **Note**:
 It only works for Quixe. It should works with any website template.
 It loads the game files via XHR so it won't work locally, it needs to be served by a web server (`npx serve *.materials/MultiRelease`)
+
+## i7-tools pull-texts
+
+`i7-tools pull-texts --google-doc <URL>`: Extract texts from a Google Doc, identified by their heading (H2 by default), and inject them in texts marked by `[id]` comments in your source file.
+
+It detects bold and italics and convert them to `[b][/b]` and `[i][/i]` so you'll need them defined in your source. That's available in `Supplemental by Jeff Nyman`, `Typographical Conveniences by Daniel Stelzer` or just copy:
+
+```
+To say i -- beginning say_i -- running on: (- style underline; -).
+To say /i -- ending say_i -- running on: (- style roman; -).
+
+To say b -- beginning say_b -- running on: (- style bold; -).
+To say /b -- ending say_b -- running on: (- style roman; -).
+```

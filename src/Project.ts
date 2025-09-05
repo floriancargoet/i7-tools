@@ -1,9 +1,9 @@
+import { InvalidArgumentError } from "commander";
 import fs from "node:fs";
 import path from "node:path";
 
 function exit(msg: string) {
-  console.error(msg);
-  process.exit(1);
+  throw new InvalidArgumentError(msg);
 }
 
 export class Project {
@@ -11,7 +11,7 @@ export class Project {
   projectName: string;
 
   static fromPath(possibleProjectPath: string) {
-    /* TODO:
+    /*
      * - is path ends with .inform, use it
      * - if path is "", use cwd as containing folder
      * - if path is folder, use as containing folder
@@ -74,6 +74,10 @@ export class Project {
 
   get blurbPath() {
     return path.resolve(this.projectDir, "Release.blurb");
+  }
+
+  get sourcePath() {
+    return path.resolve(this.projectDir, "Source/story.ni");
   }
 }
 
